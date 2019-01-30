@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title> UwU </title>
+	</head>
+
+	<!--The style sheet tag lets us clarify the properties of the canvas object with ID 'slate' -->
+	<style>
+		#slate { border: 1px solid black }
+	</style>
+
+	<h1>Ciao mondo</h1>
+	<h2>Demo</h2>
+
+	<!-- Create a div to store the canvas object, and have fallback text in case it cannot show -->
+	<div>
+		<canvas height="600" width="600" id="slate">
+			fallback text!
+		</canvas>
+	</div>
+
+	<input id="draw" type="button" value="toggle">Toggle draw mode</input>
+	<input id="clear" type="button" value="clear">Clear</input>
+
+	<script src='clickdraw.js'></script>
+</html>
