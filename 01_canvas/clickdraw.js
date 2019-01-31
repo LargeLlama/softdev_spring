@@ -1,3 +1,8 @@
+//Little Mac - Rubin P. and Matthew M.
+//SoftDev
+//Pd08
+//K01 - and I want to Paint It Better
+
 //Constant variables
 const canvas = document.getElementById("slate");
 const ctx = canvas.getContext("2d");
@@ -17,6 +22,9 @@ document.getElementById("display_radius").innerHTML = x_radius;
 //keeps track of what shape to draw, displays the current state to the user
 var drawRect = true;
 document.getElementById("status").innerHTML = "Current Draw Mode: Rectangle";
+
+//keeps track of whether the canvas is clear or not
+var isClear = true;
 
 //updates the value of height, length, and radius variables while also displaying them to the user
 document.getElementById("rect_height").oninput = function(e)
@@ -53,19 +61,24 @@ document.getElementById('draw').addEventListener('click', function(e)
 //gets button with id "clear" and runs the following function when clicked
 document.getElementById('clear').addEventListener('click', function(e)
 	{
-		//clears the entire screen of any rect
-		ctx.clearRect(0, 0, 600, 600);
+		if (isClear)
+		{
+			console.log("Already cleared, using e.preventDefault()");
+			e.preventDefault();
+		}
+		else
+		{
+			//clears the entire screen of any rect
+			ctx.clearRect(0, 0, 600, 600);
+			isClear = true;
+		}
 	});
 
 //function to get mouse position inside the canvas
-function getMousePos(canvas, e) {
-    var rect = canvas.getBoundingClientRect(); //returns the size of an element and its position relative to the viewport.
-	
-	//returns the difference between the mouse position on the page and the left/top edge of the canvas
-	return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    };
+function getMousePos(e) 
+{
+	//returns two values, x and y, representing the coordinates relative to the event provided in the parameters
+	return { x: e.offsetX, y: e.offsetY };
 }
 
 //canvas has already been initialized previously, so use that
@@ -73,17 +86,20 @@ function getMousePos(canvas, e) {
 canvas.addEventListener('click', function(e)
 	{
 		//gets the mousePos, as explained by our function
-		var mousePos = getMousePos(canvas, e);
+		var mousePos = getMousePos(e);
+		console.log(mousePos);
 
 		if (drawRect)	//when drawRect is true, draw a rectangle
 		{
-			ctx.fillRect(mousePos.x - (rect_length / 2), mousePos.y - (rect_height / 2), rect_length, rect_height);
+			ctx.fillRect(mousePos.x, mousePos.y, rect_length, rect_height);	//fills upper-left hand corner
 			//ctx.fillRect(50, 50, 100, 100); testing
 		}
 		else	//otherwise, draw an ellipse
 		{
 			ctx.beginPath();	//begin the drawing
-			ctx.ellipse(mousePos.x - (x_radius / 4),  mousePos.y - (y_radius / 4), x_radius, y_radius, 0, 0, 2 * Math.PI);	//info regarding ellipse
+			ctx.ellipse(mousePos.x - (x_radius / 4),  mousePos.y - (y_radius / 4), x_radius, y_radius, 0, 0, 2 * Math.PI);	//info regarding ellipse, fills center
 			ctx.stroke();	//write the drawing to the canvas
 		}
+
+		isClear = false;	//set the isClear boolean to false
 	});
