@@ -2,22 +2,52 @@
 const canvas = document.getElementById("slate");
 const ctx = canvas.getContext("2d");
 
-//defines the height and length of the rect
-const rect_height = 50;
-const rect_length = 50;
+//defines the height and length of the rect, displays to user
+var rect_height = document.getElementById("rect_height").value;
+document.getElementById("display_height").innerHTML = rect_height;
 
-//defines the x and y radius of the ellipse
-const x_radius = 5;
-const y_radius = 5;
+var rect_length = document.getElementById("rect_length").value;
+document.getElementById("display_length").innerHTML = rect_length;
 
-//keeps track of what shape to draw
+//defines the x and y radius of the ellipse, displays to user
+var x_radius = document.getElementById("radius").value;
+var y_radius = document.getElementById("radius").value;
+document.getElementById("display_radius").innerHTML = x_radius;
+
+//keeps track of what shape to draw, displays the current state to the user
 var drawRect = true;
+document.getElementById("status").innerHTML = "Current Draw Mode: Rectangle";
+
+//updates the value of height, length, and radius variables while also displaying them to the user
+document.getElementById("rect_height").oninput = function(e)
+{
+	rect_height = document.getElementById("rect_height").value;
+	document.getElementById("display_height").innerHTML = rect_height;
+}
+
+document.getElementById("rect_length").oninput = function(e)
+{
+	rect_length = document.getElementById("rect_length").value;
+	document.getElementById("display_length").innerHTML = rect_length;
+}
+
+document.getElementById("radius").oninput = function(e)
+{
+	x_radius = document.getElementById("radius").value;
+	y_radius = document.getElementById("radius").value;
+
+	document.getElementById("display_radius").innerHTML = x_radius;
+}
+
 
 //gets button with id "draw" and runs the following function when clicked
 document.getElementById('draw').addEventListener('click', function(e)
 	{
-		//sets the value of drawRect to opposite of what it is
-		drawRect = !drawRect;
+		drawRect = !drawRect;	//sets the value of drawRect to opposite of what it is
+		if (drawRect)
+			document.getElementById("status").innerHTML = "Current Draw Mode: Rectangle";
+		else
+			document.getElementById("status").innerHTML = "Current Draw Mode: Dot";
 	});
 
 //gets button with id "clear" and runs the following function when clicked
@@ -37,6 +67,7 @@ function getMousePos(canvas, e) {
       y: e.clientY - rect.top
     };
 }
+
 //canvas has already been initialized previously, so use that
 //to check when clicked and run the following function
 canvas.addEventListener('click', function(e)
