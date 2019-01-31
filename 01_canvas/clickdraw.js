@@ -1,6 +1,6 @@
 //Little Mac - Rubin P. and Matthew M.
-//SoftDev
-//Pd08
+//SoftDev Pd08
+//2019-01-31
 //K01 - and I want to Paint It Better
 
 //Constant variables
