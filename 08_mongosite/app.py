@@ -8,3 +8,7 @@ app.secret_key = os.urandom(32)
 @app.route('/')
 def root():
     return render_template('home.html')
+
+@app.route('/auth')
+def auth():
+    #code to validate stuff
