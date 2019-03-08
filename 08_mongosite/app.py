@@ -5,7 +5,6 @@ import pymongo, json
 import os, random
 
 app = Flask(__name__)
-
 app.secret_key = os.urandom(32)
 
 @app.route('/')
@@ -35,7 +34,6 @@ def results():
     with open('data/pokemon.json') as file:
         file_data = json.load(file)
     collection.insert(file_data)
-
 
     return render_template('results.html', types = pokemon.find_types(collection, type_0, type_1))
 
