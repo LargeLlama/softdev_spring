@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session
+from util import pokemon
 
 import pymongo, json
 import os, random
