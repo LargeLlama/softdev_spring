@@ -16,14 +16,10 @@ def root():
 def auth():
     SERVER_ADDR = request.args.get('ip')
     session['IP'] = SERVER_ADDR
-    connection = pymongo.MongoClient(SERVER_ADDR)
-    db = connection.silicon_wings
-    collection = db.pokemon
+    #connection = pymongo.MongoClient(SERVER_ADDR)
+    #db = connection.silicon_wings
+    #collection = db.pokemon
 
-    with open('data/pokemon.json') as file:
-        file_data = json.load(file)
-
-    collection.insert(file_data)
     return render_template('auth.html', ip = SERVER_ADDR)
 
 @app.route('/results')
@@ -35,6 +31,11 @@ def results():
     connection = pymongo.MongoClient(SERVER_ADDR)
     db = connection.silicon_wings
     collection = db.pokemon
+
+    with open('data/pokemon.json') as file:
+        file_data = json.load(file)
+    collection.insert(file_data)
+
 
     return render_template('results.html', types = pokemon.find_types(collection, type_0, type_1))
 
