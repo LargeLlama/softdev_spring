@@ -11,7 +11,11 @@
 <body>
 
   <h2>Results</h2>
-  {{types}}
+  <ul> <strong> Pokemon </strong>
+  {% for poke in types %}
+	  <li> {{ poke }} </li>
+  {% endfor %}
+  </ul>
   <p>
     <form action="/">
       <button type="submit">Go Back</button>
