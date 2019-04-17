@@ -58,8 +58,8 @@ print(composite_range(0, 100))
 
 #listcompy way
 def composite_range_comp(start, end):
-    fourB = [ x for x in range(start, end) if not is_prime(x) ]
-    return fourB
+    return [ x for x in range(start, end) if not is_prime(x) ]
+
 
 print(composite_range_comp(0, 100))
 
@@ -79,7 +79,30 @@ print(prime_range(0, 100))
 
 #listcompy way
 def prime_range_comp(start, end):
-    fiveB = [ x for x in range(start, end) if is_prime(x) ]
-    return fiveB
-
+    return [ x for x in range(start, end) if is_prime(x) ]
+    
 print(prime_range_comp(0, 100))
+
+matrix = [
+    [1, 3 ,2],
+    [3, 5, 7],
+    ]
+
+#loopy way
+def transpose(matrix):
+    transposed_matrix = []
+    for index in range(len(matrix[0])):
+        new_row = []
+        for row in matrix:
+            new_row.append(row[index])
+        transposed_matrix.append(new_row)
+    return transposed_matrix
+print('#7(loopy):', transpose(matrix))
+
+# list_comp
+def transpose_listcomp(matrix):
+    return [ [ row[index] for row in matrix ] for index in range(len(matrix[0])) ]
+
+print(matrix)
+print(transpose_listcomp(matrix))
+
