@@ -8,8 +8,8 @@ def old_fib(n):
 
 #test
 print("Old way!")
-print(old_fib(5))
-print(old_fib(10))
+print("fib(5): " + str(old_fib(5)))
+print("fib(10): " + str (old_fib(10)))
 #print(old_fib(100)) takes too long
 
 #faster, new
@@ -33,8 +33,8 @@ def fib(n):
     else:
         return fib(n - 1) + fib(n - 2)
 
-print("new")
-print(fib(5))
-print(fib(10))
-print(fib(100))
-print(fib(400))
+print("\nnew")
+print("fib(5): " + str(fib(5)))
+print("fib(10): " + str(fib(10)))
+print("fib(100): " + str(fib(100)))
+print("fib(400): " + str(fib(400)))
